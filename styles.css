@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+/* Root Variables */
+:root {
+    --primary-bg: #000000;
+    --secondary-bg: #1a1a1a;
+    --primary-text: #ffffff;
+    --secondary-text: #aaaaaa;
+    --accent-color: #555555;
+    --highlight-color: #4a4a4a;
+    --orange: #FFA500;
+    --pink: #FF69B4;
+    --yellow: #FFFF00;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Particle Background */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-text);
+}
+
+.nav-list {
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-list li {
+    margin-left: 1.5rem;
+}
+
+.nav-list a {
+    color: var(--primary-text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: lowercase;
+    font-family: 'Montserrat', Arial, sans-serif;
+    transition: color 0.3s ease;
+}
+
+.nav-list a:hover {
+    color: var(--accent-color);
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* Main Content Sections */
+main {
+    padding-top: 60px;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Headings and Text Styles */
+h1, h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--orange), var(--pink), var(--yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.subtitle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(255,165,0,0.2), rgba(255,105,180,0.2), rgba(255,255,0,0.2));
+}
+
+/* Social Buttons */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.social-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Social Button Hover Effects */
+.social-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+.social-button:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255,165,0,0.2), rgba(255,105,180,0.2), rgba(255,255,0,0.2));
+}
+
+.social-button:hover::before {
+    transform: scale(1);
+}
+
+.social-button .iconify {
+    font-size: 40px;
+    color: var(--primary-text);
+    transition: all 0.3s ease;
+}
+
+.social-button:hover .iconify {
+    transform: scale(1.2);
+}
+
+/* Individual Social Button Hover Effects */
+.social-button.twitter:hover { background: linear-gradient(135deg, #1DA1F2, #0077B5); }
+.social-button.instagram:hover { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+.social-button.linkedin:hover { background: linear-gradient(135deg, #0077B5, #00A0DC); }
+.social-button.github:hover { background: linear-gradient(135deg, #333, #6cc644); }
+
+/* Timeline Section */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(to bottom, rgba(255,165,0,0.05), rgba(255,105,180,0.05), rgba(255,255,0,0.05));
+    border-radius: 15px;
+}
+
+.timeline-item {
+    border-left: 2px solid var(--primary-text);
+    padding: 0 0 2rem 2rem;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, var(--orange), var(--pink), var(--yellow));
+    border-radius: 50%;
+    position: absolute;
+    left: -8.5px;
+    top: 0;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--orange), var(--pink), var(--yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.company-title {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+}
+
+/* Tech Stack Section */
+.grid, .creative-tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.tile:hover {
+    transform: scale(1.05);
+}
+
+.tile .iconify {
+    font-size: 50px;
+    color: var(--primary-text);
+}
+
+.tile .iconify {
+    color: inherit !important;
+    fill: inherit !important;
+    filter: none !important;
+}
+
+/* Specific styles for MongoDB and NextJS icons */
+.tile .iconify[data-icon="logos:mongodb"],
+.tile .iconify[data-icon="logos:nextjs"] {
+    filter: brightness(0) invert(1) !important;
+}
+
+.tile .iconify[data-icon="simple-icons:figma"] {
+    color: #F24E1E !important; /* Figma orange */
+}
+
+.tile .iconify[data-icon="simple-icons:adobeaftereffects"] {
+    color: #9999FF !important; /* Adobe After Effects purple */
+}
+
+.tile .iconify[data-icon="simple-icons:canva"] {
+    color: #00C4CC !important; /* Canva blue */
+}
+
+.techstack-subtitle {
+    font-size: 2rem;
+    margin: 1.5rem 0 1rem;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tech-stack-description {
+    max-width: 800px;
+    margin: 2rem auto 0;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tech-stack-description p {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    margin: 0; /* Remove default margin */
+}
+
+/* Portfolio Section */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.portfolio-card {
+    background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--primary-text);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--orange), var(--pink), var(--yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.card-content p {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    margin: 0;
+}
+
+/* Icon styles for tech stack */
+.tile .iconify {
+    color: inherit !important;
+    fill: inherit !important;
+    filter: none !important;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+
+    /* Adjusted Social Buttons for mobile */
+    .social-buttons {
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .social-button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .social-button .iconify {
+        font-size: 35px;
+    }
+
+    /* Mobile Navigation */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        transition: all 0.3s ease-in-out;
+        background-color: var(--primary-text);
+    }
+
+    .nav-list {
+        position: fixed;
+        left: -100%;
+        top: 5rem;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-list.active {
+        left: 0;
+    }
+
+    .nav-list li {
+        margin: 2.5rem 0;
+    }
+
+    .nav-list a {
+        font-size: 1.2rem;
+    }
+
+    /* Responsive Typography */
+    h1, h2 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    /* Responsive Tech Stack Grid */
+    .grid, .creative-tools-grid {
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tile {
+        width: 70px;
+        height: 70px;
+    }
+
+    .tile .iconify {
+        font-size: 35px;
+    }
+
+    .techstack-subtitle {
+        font-size: 1.5rem;
+        margin: 1rem 0 0.5rem;
+    }
+
+    /* Responsive Portfolio Grid */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .card-content p {
+        font-size: 0.85rem;
+    }
+
+    /* Timeline adjustments */
+    .timeline-content h3 {
+        font-size: 1rem;
+    }
+
+    .company-title {
+        font-size: 0.85rem;
+    }
+
+    .timeline-date {
+        font-size: 0.75rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.8rem;
+    }
+
+    /* Tech stack description */
+    .tech-stack-description,
+    .card-content {
+        padding: 1rem;
+    }
+
+    .tech-stack-description p,
+    .card-content p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Additional Media Queries for Smaller Screens */
+@media (max-width: 480px) {
+    /* Smaller Social Buttons */
+    .social-buttons {
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-button {
+        width: 60px;
+        height: 60px;
+    }
+
+    .social-button .iconify {
+        font-size: 30px;
+    }
+
+    /* Smaller Tech Stack Tiles */
+    .tile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .tile .iconify {
+        font-size: 30px;
+    }
+
+    /* Adjusted Typography for Smaller Screens */
+    h1, h2 {
+        font-size: 2.5rem;
+    }
+
+    .techstack-subtitle {
+        font-size: 1.5rem;
+    }
+}

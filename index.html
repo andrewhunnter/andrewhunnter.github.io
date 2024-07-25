@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Hunter - Online Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+</head>
+<body>
+    <canvas id="particles-js"></canvas>
+
+    <header>
+        <nav>
+            <div class="logo">ah.</div>
+            <div class="menu-icon">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#home">home</a></li>
+                <li><a href="#socials">socials</a></li>
+                <li><a href="#experience">experience</a></li>
+                <li><a href="#tech-stack">tech stack</a></li>
+                <li><a href="#portfolio">portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <h1>andrewhunter</h1>
+            <p class="subtitle">online portfolio</p>
+        </section>
+
+        <section id="socials" class="section">
+            <h2>socials</h2>
+            <p class="subtitle">where to find me</p>
+            <div class="social-buttons">
+                <a href="https://x.com/andrewhunnter" class="social-button twitter" target="_blank">
+                    <span class="iconify" data-icon="mdi:twitter"></span>
+                </a>
+                <a href="https://instagram.com/andrewhunnter" class="social-button instagram" target="_blank">
+                    <span class="iconify" data-icon="mdi:instagram"></span>
+                </a>
+                <a href="https://www.linkedin.com/in/andrew-hunter-1bab182b0" class="social-button linkedin" target="_blank">
+                    <span class="iconify" data-icon="mdi:linkedin"></span>
+                </a>
+                <a href="https://github.com/andrewhunnter" class="social-button github" target="_blank">
+                    <span class="iconify" data-icon="mdi:github"></span>
+                </a>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>experience</h2>
+            <p class="subtitle">career history and resume</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <div class="timeline-content">
+                        <h3>Full-Time Educator & Expeditor</h3>
+                        <div class="company-title">Lululemon Athletica</div>
+                        <p>Enhanced customer experiences, managed inventory, and streamlined checkout processes using various POS systems.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020 - 2022</div>
+                    <div class="timeline-content">
+                        <h3>Server and Expeditor</h3>
+                        <div class="company-title">Maynard's Restaurant</div>
+                        <p>Orchestrated dine-in and takeout orders, optimized table turnover, and maximized revenue through strategic upselling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack" class="section">
+            <h2>tech stack</h2>
+            <p class="subtitle">technology skill showcase</p>
+            <h3 class="techstack-subtitle">software development</h3>
+            <div class="grid">
+                <div class="tile"><span class="iconify" data-icon="vscode-icons:file-type-html"></span></div>
+                <div class="tile"><span class="iconify" data-icon="vscode-icons:file-type-css"></span></div>
+                <div class="tile"><span class="iconify" data-icon="vscode-icons:file-type-js"></span></div>
+                <div class="tile"><span class="iconify" data-icon="vscode-icons:file-type-reactjs"></span></div>
+                <div class="tile"><span class="iconify" data-icon="logos:mongodb"></span></div>
+                <div class="tile"><span class="iconify" data-icon="logos:nextjs"></span></div>
+                <div class="tile"><span class="iconify" data-icon="vscode-icons:file-type-tailwind"></span></div>
+            </div>
+            <h3 class="techstack-subtitle">creative tools</h3>
+            <div class="creative-tools-grid">
+                <div class="tile"><span class="iconify" data-icon="simple-icons:canva"></span></div>
+                <div class="tile"><span class="iconify" data-icon="simple-icons:figma"></span></div>
+                <div class="tile"><span class="iconify" data-icon="simple-icons:adobeaftereffects"></span></div>
+            </div>
+            <div class="tech-stack-description">
+                <p>Proficient in a wide range of development technologies and creative tools, 
+                enabling the creation of robust web applications and engaging visual content.</p>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section">
+            <h2>portfolio</h2>
+            <p class="subtitle">services, solutions, and past work</p>
+            <div class="portfolio-grid">
+                <a href="https://carcodes.xyz" class="portfolio-card" target="_blank">
+                    <img src="/portfolio-images/carcodes-port.png" alt="CarCodes Project">
+                    <div class="card-content">
+                        <h3>carcodes.xyz</h3>
+                        <p>Your gateway to community and opportunity. A membership where users get a public landing page and physical QR code attached to their page. The project is a webapp built using NextJS, Stripe, and MongoDB.</p>
+                    </div>
+                </a>
+                <div class="portfolio-card">
+                    <img src="/portfolio-images/puphub-port.png" alt="Pup Hub Project">
+                    <div class="card-content">
+                        <h3>pup hub</h3>
+                        <p>Tasked with increasing involvement in health and wellness programs for Citi Bank's Tampa employees. Utilized design tools like Canva and Figma for prototyping/designing a mobile app component.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
