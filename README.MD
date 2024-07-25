@@ -4,7 +4,7 @@
 <p align="center"> 
   <kbd>
     <a href="#" target="_blank"><img 
-    src="portfolio-images/wesbite-banner.png">
+    src="portfolio-images/website-banner.png">
   </a>
   </kbd>
 </p>
