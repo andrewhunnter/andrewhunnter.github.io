@@ -14,6 +14,7 @@
     --yellow: #FFFF00;
 }
 
+
 /* Global Styles */
 * {
     box-sizing: border-box;
@@ -34,12 +35,12 @@ h1, h2, h3 {
 
 /* Particle Background */
 #particles-js {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
 }
 
 /* Header and Navigation */
@@ -99,6 +100,8 @@ main {
 }
 
 .section {
+    /* Your existing styles */
+    margin-bottom: 6rem;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -109,6 +112,10 @@ main {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
+
+    /* New styles */
+    position: relative;
+    overflow: hidden;
 }
 
 .section.active {
@@ -116,14 +123,50 @@ main {
     transform: translateY(0);
 }
 
+/* Home Section */
+#home {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.home-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    /* Remove any margin or padding that might be affecting vertical centering */
+    margin: 0;
+    padding: 0;
+    /* Use flexbox for finer control over vertical alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Ensure this takes up the full height of the parent */
+    height: 100%;
+}
+
+/* Other sections */
+#socials, #experience, #tech-stack, #portfolio {
+    background-color: var(--primary-bg);
+    margin-bottom: 8rem;
+}
+
 /* Headings and Text Styles */
 h1, h2 {
     font-size: 4rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--orange), var(--pink), var(--yellow));
+    background: var(--primary-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    z-index: 2;
+    /* Remove any default margins that might affect centering */
+    margin-top: 0;
 }
 
 p {
@@ -131,17 +174,20 @@ p {
     margin-bottom: 2rem;
 }
 
+
 .subtitle {
     font-size: 1.2rem;
     background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 25px;
     padding: 0.8rem 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0; /* Remove bottom margin */
     display: inline-block;
     backdrop-filter: blur(5px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .subtitle:hover {
@@ -263,25 +309,53 @@ p {
 }
 
 /* Tech Stack Section */
-.grid, .creative-tools-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
 }
 
-.tile {
-    width: 100px;
-    height: 100px;
+.tech-stack-card {
     background: linear-gradient(135deg, rgba(255,165,0,0.1), rgba(255,105,180,0.1), rgba(255,255,0,0.1));
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;  /* Reduced from 2rem */
+}
+
+.tech-stack-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.tech-stack-card h3 {
+    font-size: 1.4rem;  /* Reduced from 1.8rem */
+    margin-bottom: 1.2rem;  /* Slightly reduced margin */
+    background: var(--primary-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;  /* Reduced from 1rem */
+}
+
+.tile {
+    width: 70px;  /* Reduced from 80px */
+    height: 70px;  /* Reduced from 80px */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .tile:hover {
@@ -289,7 +363,7 @@ p {
 }
 
 .tile .iconify {
-    font-size: 50px;
+    font-size: 40px;  /* Reduced from 50px */
     color: var(--primary-text);
 }
 
@@ -402,6 +476,10 @@ p {
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
+    h1 {
+        font-size: 3rem;
+    }
+
     /* Adjusted Social Buttons for mobile */
     .social-buttons {
         gap: 1.5rem;
@@ -478,12 +556,12 @@ p {
     }
 
     .tile {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 
     .tile .iconify {
-        font-size: 35px;
+        font-size: 30px;
     }
 
     .techstack-subtitle {
@@ -532,6 +610,8 @@ p {
         font-size: 0.85rem;
     }
 }
+
+
 
 /* Additional Media Queries for Smaller Screens */
 @media (max-width: 480px) {

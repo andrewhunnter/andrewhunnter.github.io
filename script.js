@@ -63,13 +63,17 @@ function setupSectionTransitions() {
 function setupParticleAnimation() {
     const canvas = document.getElementById('particles-js');
     const ctx = canvas.getContext('2d');
+    const homeSection = document.getElementById('home');
 
-    // Set canvas size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Set canvas size to match the home section
+    function setCanvasSize() {
+        canvas.width = homeSection.offsetWidth;
+        canvas.height = homeSection.offsetHeight;
+        centerX = canvas.width / 2;
+        centerY = canvas.height / 2;
+    }
 
-    let centerX = canvas.width / 2;
-    let centerY = canvas.height / 2;
+    setCanvasSize();
 
     const colors = ['#FF69B4', '#FFA500', '#FFFF00', '#FFFFFF']; // Pink, Orange, Yellow, White
 
@@ -226,10 +230,7 @@ function setupParticleAnimation() {
 
     // Resize canvas when window is resized
     window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        centerX = canvas.width / 2;
-        centerY = canvas.height / 2;
+        setCanvasSize();
         nodes.forEach(node => {
             const angle = Math.random() * Math.PI * 2;
             const distance = Math.random() * Math.min(canvas.width, canvas.height) * 0.4;
