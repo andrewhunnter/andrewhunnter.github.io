@@ -65,12 +65,18 @@ function setupParticleAnimation() {
     const ctx = canvas.getContext('2d');
     const homeSection = document.getElementById('home');
 
+    let centerX, centerY;
+
     // Set canvas size to match the home section
     function setCanvasSize() {
-        canvas.width = homeSection.offsetWidth;
-        canvas.height = homeSection.offsetHeight;
-        centerX = canvas.width / 2;
-        centerY = canvas.height / 2;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = homeSection.offsetWidth * dpr;
+        canvas.height = homeSection.offsetHeight * dpr;
+        canvas.style.width = `${homeSection.offsetWidth}px`;
+        canvas.style.height = `${homeSection.offsetHeight}px`;
+        ctx.scale(dpr, dpr);
+        centerX = canvas.width / (2 * dpr);
+        centerY = canvas.height / (2 * dpr);
     }
 
     setCanvasSize();
@@ -84,21 +90,21 @@ function setupParticleAnimation() {
 
         initializeNode(isBigNode) {
             const angle = Math.random() * Math.PI * 2;
-            const distance = Math.random() * Math.min(canvas.width, canvas.height) * 0.4;
+            const distance = Math.random() * Math.min(centerX, centerY) * 0.8;
             this.x = centerX + Math.cos(angle) * distance;
             this.y = centerY + Math.sin(angle) * distance;
             this.isBigNode = isBigNode;
-            this.size = isBigNode ? Math.random() * 4 + 3 : Math.random() * 2 + 1;
+            this.size = isBigNode ? Math.random() * 3 + 2 : Math.random() * 1.5 + 0.5;
             this.connections = [];
             this.angle = angle;
-            this.orbitSpeed = (Math.random() - 0.5) * 0.0005;
+            this.orbitSpeed = (Math.random() - 0.5) * 0.0002;
             this.distanceFromCenter = distance;
-            this.mass = isBigNode ? 5 : 1;
+            this.mass = isBigNode ? 3 : 1;
             this.color = colors[Math.floor(Math.random() * colors.length)];
             this.glowIntensity = 0;
-            this.glowSpeed = Math.random() * 0.02 + 0.01;
+            this.glowSpeed = Math.random() * 0.01 + 0.005;
             this.glowing = false;
-            this.glowTimer = Math.random() * 200;
+            this.glowTimer = Math.random() * 100;
         }
 
         update(nodes) {
@@ -122,14 +128,14 @@ function setupParticleAnimation() {
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const force = node.mass / (distance * distance);
                     const angle = Math.atan2(dy, dx);
-                    this.x += Math.cos(angle) * force * 0.1;
-                    this.y += Math.sin(angle) * force * 0.1;
+                    this.x += Math.cos(angle) * force * 0.05;
+                    this.y += Math.sin(angle) * force * 0.05;
                 }
             });
         }
 
         keepWithinBounds() {
-            const maxDistance = Math.min(canvas.width, canvas.height) * 0.4;
+            const maxDistance = Math.min(centerX, centerY) * 0.8;
             const currentDistance = Math.sqrt((this.x - centerX) ** 2 + (this.y - centerY) ** 2);
             if (currentDistance > maxDistance) {
                 const angle = Math.atan2(this.y - centerY, this.x - centerX);
@@ -151,7 +157,7 @@ function setupParticleAnimation() {
                     this.glowTimer--;
                     if (this.glowTimer <= 0) {
                         this.glowing = true;
-                        this.glowTimer = Math.random() * 200;
+                        this.glowTimer = Math.random() * 100;
                     }
                 }
             }
@@ -162,17 +168,15 @@ function setupParticleAnimation() {
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             
             if (this.color === '#FFFFFF') {
-                // For white nodes, use a simple white fill with reduced opacity
-                ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + this.glowIntensity * 0.5})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + this.glowIntensity * 0.7})`;
             } else {
-                // For colored nodes, use the gradient
-                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * (2 + this.glowIntensity * 2));
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * (1.5 + this.glowIntensity));
                 gradient.addColorStop(0, this.color);
                 gradient.addColorStop(1, `rgba(${parseInt(this.color.slice(1,3),16)}, ${parseInt(this.color.slice(3,5),16)}, ${parseInt(this.color.slice(5,7),16)}, 0)`);
                 ctx.fillStyle = gradient;
             }
             
-            ctx.globalAlpha = 0.7 + this.glowIntensity * 0.3;
+            ctx.globalAlpha = 0.6 + this.glowIntensity * 0.4;
             ctx.fill();
             ctx.globalAlpha = 1;
         }
@@ -181,8 +185,8 @@ function setupParticleAnimation() {
             this.connections = nodes.filter(node => {
                 if (node === this) return false;
                 const distance = Math.hypot(this.x - node.x, this.y - node.y);
-                return distance < (this.isBigNode ? 150 : 100);
-            }).slice(0, this.isBigNode ? 5 : 3);
+                return distance < (this.isBigNode ? 100 : 50);
+            }).slice(0, this.isBigNode ? 3 : 2);
         }
 
         drawConnections() {
@@ -190,17 +194,17 @@ function setupParticleAnimation() {
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(node.x, node.y);
-                ctx.strokeStyle = 'rgba(150, 150, 150, 0.2)';
-                ctx.lineWidth = this.isBigNode ? 1 : 0.5;
+                ctx.strokeStyle = 'rgba(150, 150, 150, 0.1)';
+                ctx.lineWidth = this.isBigNode ? 0.5 : 0.3;
                 ctx.stroke();
             });
         }
     }
 
     const nodes = [];
-    const nodeCount = 120;
-    const bigNodeCount = 10;
-    const coloredNodeCount = 90;
+    const nodeCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 10000));
+    const bigNodeCount = Math.floor(nodeCount * 0.1);
+    const coloredNodeCount = Math.floor(nodeCount * 0.6);
 
     // Initialize nodes
     for (let i = 0; i < bigNodeCount; i++) {
@@ -213,6 +217,8 @@ function setupParticleAnimation() {
         nodes.push(new Node());
     }
 
+    let animationFrameId;
+
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -223,21 +229,28 @@ function setupParticleAnimation() {
             node.drawConnections();
         });
 
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
     }
 
     animate();
 
     // Resize canvas when window is resized
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        setCanvasSize();
-        nodes.forEach(node => {
-            const angle = Math.random() * Math.PI * 2;
-            const distance = Math.random() * Math.min(canvas.width, canvas.height) * 0.4;
-            node.x = centerX + Math.cos(angle) * distance;
-            node.y = centerY + Math.sin(angle) * distance;
-            node.angle = angle;
-            node.distanceFromCenter = distance;
-        });
+        clearTimeout(resizeTimeout);
+        cancelAnimationFrame(animationFrameId);
+        
+        resizeTimeout = setTimeout(() => {
+            setCanvasSize();
+            nodes.forEach(node => {
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * Math.min(centerX, centerY) * 0.8;
+                node.x = centerX + Math.cos(angle) * distance;
+                node.y = centerY + Math.sin(angle) * distance;
+                node.angle = angle;
+                node.distanceFromCenter = distance;
+            });
+            animate();
+        }, 250);
     });
 }
