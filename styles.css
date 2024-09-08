@@ -210,7 +210,7 @@ p {
 .social-button:hover {
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, rgba(255,165,0,0.2), rgba(255,105,180,0.2), rgba(255,255,0,0.2));
+    background: linear-gradient(135deg, rgba(84, 81, 87, 0.2), rgba(51, 48, 50, 0.2), rgba(165, 165, 157, 0.2));
 }
 
 .social-button:hover::before {
@@ -230,6 +230,7 @@ p {
 /* Timeline Section */
 .timeline {
     max-width: 800px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     margin: 0 auto;
     padding: 2rem;
     background: var(--gradient-bg);

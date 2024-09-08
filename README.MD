@@ -10,18 +10,7 @@
 </p>
 
 ## WHAT IS THIS?...
-Currently, this is my pesonal landing page. The goal is to add a portoflio gallery underneath the information accordion. While this feature is being built, enjoy the simple and effective website I used and host with github pages.
-
----
-
-## COMPONENT STRUCTURE
-Using a modular component structure in web development promotes **_reusabilityy_**, **_maintainability_**, and **_scalability_**.
-
-All components are stacked in the center and can be placed on top or below each other. The current structure is:
-1. **profile picture**
-2. **name and bio**
-3. **link grid**
-4. **descirption accordion**
+This is my personal portfolio website. The sole purpose of this site is to showcase my online skills, resume, and personality. Scroll and click through...
 
 ---
 

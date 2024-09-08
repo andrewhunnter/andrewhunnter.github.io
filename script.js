@@ -1,8 +1,5 @@
 // Wait for the DOM to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation
-    setupSmoothScrolling();
-
     // Mobile menu functionality
     setupMobileMenu();
 
@@ -13,47 +10,37 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDynamicNavbar();
 
     // Set up Vanta.js Topology animation
-    VANTA.TOPOLOGY({
-      el: "#vanta-bg", // The new div for the animation
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0xffffff,         // Adjust these colors for the gradient effect
-      backgroundColor: 0x0     // Background color
-    });
-});
-
-// Function to set up smooth scrolling for navigation links
-function setupSmoothScrolling() {
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+    if (document.getElementById('vanta-bg')) {
+        VANTA.TOPOLOGY({
+            el: "#vanta-bg", // The div for the animation
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xffffff,     // Adjust these colors for the gradient effect
+            backgroundColor: 0x0 // Background color
         });
-    });
-}
+    }
+});
 
 // Function to set up mobile menu functionality
 function setupMobileMenu() {
     const menuIcon = document.querySelector('.menu-icon');
-    const navList = document.querySelector('.nav-list');
+    const navLinks = document.querySelector('.nav-links');
 
     menuIcon.addEventListener('click', () => {
         menuIcon.classList.toggle('active');
-        navList.classList.toggle('active');
+        navLinks.classList.toggle('active');
     });
 
     // Close menu when a link is clicked
-    document.querySelectorAll('.nav-list a').forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             menuIcon.classList.remove('active');
-            navList.classList.remove('active');
+            navLinks.classList.remove('active');
         });
     });
 }
@@ -111,7 +98,7 @@ function setupDynamicNavbar() {
         }
     });
 
-    // Highlight active section in navbar
+    // Highlight active section in navbar (for single-page scrolling)
     const sections = document.querySelectorAll('.section');
     window.addEventListener('scroll', () => {
         let current = '';
