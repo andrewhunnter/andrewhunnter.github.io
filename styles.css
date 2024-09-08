@@ -365,7 +365,7 @@ p {
 /* Media Queries */
 @media (max-width: 768px) {
     h1, h2 {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 
     .social-buttons {
