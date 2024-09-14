@@ -134,3 +134,55 @@ p {
     align-items: center;
     height: 100%;
 }
+
+/* Watchlist Styles */
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.watchlist-tile {
+    background: var(--gradient-bg);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    text-decoration: none;
+    color: var(--primary-text);
+}
+
+.watchlist-tile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.watchlist-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.watchlist-chart {
+    width: 200px;
+    height: 150px;  /* Add this line to give the chart a defined height */
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.watchlist-tile h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-text);
+}
+
+.watchlist-tile p {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    flex-grow: 1;
+}
