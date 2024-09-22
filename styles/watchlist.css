@@ -168,8 +168,8 @@ p {
 }
 
 .watchlist-chart {
-    width: 200px;
-    height: 150px;  /* Add this line to give the chart a defined height */
+    width: 100%;
+    height: 300px;  /* Increased height to match the JS setting */
     padding: 1rem;
     display: flex;
     align-items: center;

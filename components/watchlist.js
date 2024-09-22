@@ -1,38 +1,9 @@
 const API_KEY = 'BZBFZFAOB610C5PJ'; // Replace with your actual API key
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
-
-function getCachedData(symbol) {
-    const cachedData = localStorage.getItem(symbol);
-    if (cachedData) {
-        const { timestamp, data } = JSON.parse(cachedData);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-            console.log(`Using cached data for ${symbol}`);
-            return data;
-        }
-    }
-    return null;
-}
-
-function setCachedData(symbol, data) {
-    const cacheItem = {
-        timestamp: Date.now(),
-        data: data
-    };
-    localStorage.setItem(symbol, JSON.stringify(cacheItem));
-}
 
 async function fetchStockData(symbol) {
-    // Check cache first
-    const cachedData = getCachedData(symbol);
-    if (cachedData) {
-        return cachedData;
-    }
-
     try {
-        const response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`);
+        const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`);
         const data = await response.json();
-
-        console.log('API Response:', data);  // Log the full response for debugging
 
         if (data['Note']) {
             throw new Error('Rate limit exceeded. Please wait and try again later.');
@@ -42,19 +13,15 @@ async function fetchStockData(symbol) {
             throw new Error(data['Error Message']);
         }
 
-        const globalQuote = data['Global Quote'];
-        if (!globalQuote) {
+        const timeSeries = data['Time Series (Daily)'];
+        if (!timeSeries) {
             throw new Error('No data available for the symbol: ' + symbol);
         }
 
-        // Extract the latest price
-        const price = parseFloat(globalQuote['05. price']);
-        const result = [price]; // Return as an array to maintain compatibility with the chart
+        const dates = Object.keys(timeSeries).slice(0, 7);
+        const closingPrices = dates.map(date => parseFloat(timeSeries[date]['4. close']));
 
-        // Cache the result
-        setCachedData(symbol, result);
-
-        return result;
+        return { dates, closingPrices };
     } catch (error) {
         console.error(`Error fetching data for ${symbol}:`, error.message);
         return null;
@@ -69,9 +36,9 @@ async function createChart(company) {
         return;
     }
 
-    // Ensure the container has sufficient height and width
-    chartContainer.style.height = '200px';  // Set a height for canvas
-    chartContainer.style.width = '400px';   // Set a width for canvas
+    // Set dimensions for the chart canvas
+    chartContainer.style.height = '300px';  
+    chartContainer.style.width = '100%';  // Changed to 100% for responsiveness
 
     const data = await fetchStockData(company);
     if (!data) {
@@ -80,15 +47,21 @@ async function createChart(company) {
     }
 
     const ctx = chartContainer.getContext('2d');
+
+    // Create a gradient for the line
+    const gradient = ctx.createLinearGradient(0, 0, chartContainer.width, 0);
+    gradient.addColorStop(0, 'purple');
+    gradient.addColorStop(1, 'orange');
+
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Current Price'],
+            labels: data.dates.reverse(),
             datasets: [{
-                label: 'Stock Price',
-                data: data,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
+                label: 'Closing Price',
+                data: data.closingPrices.reverse(),
+                borderColor: gradient,
+                borderWidth: 6,  // Increased line thickness
                 fill: false,
                 tension: 0.1
             }]
@@ -111,12 +84,9 @@ async function createChart(company) {
     console.log(`Chart created for ${company}`);
 }
 
-// Create charts for all companies
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM content loaded, starting chart creation');
     const companies = ['NVDA', 'IONQ', 'COST'];
     for (const company of companies) {
         await createChart(company);
     }
-    console.log('All charts creation attempts completed');
 });
