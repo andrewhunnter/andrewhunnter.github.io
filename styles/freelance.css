@@ -114,6 +114,7 @@ p {
     color: var(--primary-text);
 }
 
+/* Home Section */
 #vanta-bg {
     position: absolute;
     top: 0;
@@ -164,54 +165,186 @@ p {
     100% { transform: translate(-50%, 20px); opacity: 0; }
 }
 
-/* Watchlist Styles */
-.watchlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
+.section {
+    position: relative;
+    padding-bottom: 2rem; /* Add some padding at the bottom of each section */
 }
 
-.watchlist-tile {
+.section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 1px; /* Thin line */
+    background-color: var(--primary-text);
+    opacity: 0.6; /* Less transparent */
+}
+
+/* Remove the bottom separator from the last section */
+.section:last-of-type::after {
+    display: none;
+}
+
+/* Adjust top padding for all sections except the first one */
+.section:not(:first-of-type) {
+    padding-top: 2rem;
+}
+
+.calendly-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
     background: var(--gradient-bg);
     border: var(--card-border);
     border-radius: var(--card-radius);
     overflow: hidden;
-    transition: var(--transition);
-    display: flex;
-    text-decoration: none;
-    color: var(--primary-text);
 }
 
-.watchlist-tile:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+.calendly-inline-widget {
+    position: relative;
+    min-width: 320px;
+    height: 700px;
 }
 
-.watchlist-content {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .calendly-inline-widget {
+        height: 600px;
+    }
+    
+    .calendly-container {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
 }
 
-.watchlist-chart {
+/* Services Container */
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
     width: 100%;
-    height: 300px;  /* Increased height to match the JS setting */
-    padding: 1rem;
-    display: flex;
-    align-items: center;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-.watchlist-tile h3 {
+.service-card {
+    background: var(--gradient-bg);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card.featured {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.service-card h3 {
+    color: var(--primary-text);
+    margin-bottom: 1rem;
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    -webkit-text-fill-color: var(--primary-text);
+}
+
+.price {
+    font-size: 1.8rem;
+    color: var(--primary-text);
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+.service-details {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.service-details li {
+    color: var(--secondary-text);
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-details li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
     color: var(--primary-text);
 }
 
-.watchlist-tile p {
-    font-size: 1rem;
-    color: var(--secondary-text);
-    flex-grow: 1;
+.timeline {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    color: var(--primary-text);
 }
+
+/* Maintenance Section */
+.maintenance-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 4rem auto 2rem;
+    padding: 0 1rem;
+}
+
+.maintenance-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-text);
+    -webkit-text-fill-color: var(--primary-text);
+}
+
+.maintenance-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.maintenance-card {
+    background: var(--gradient-bg);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.maintenance-card:hover {
+    transform: translateY(-5px);
+}
+
+.maintenance-card h3 {
+    color: var(--primary-text);
+    -webkit-text-fill-color: var(--primary-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services-container {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card.featured {
+        transform: none;
+    }
+
+    .maintenance-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .price {
+        font-size: 1.5rem;
+    }
+}
+
+
