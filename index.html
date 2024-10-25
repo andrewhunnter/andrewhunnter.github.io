@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>andrew hunter - online portfolio</title>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="/styles/styles.css">
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.topology.min.js"></script>
-
 </head>
 <body>
     <header class="navbar">
         <div class="logo">ah.</div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span class="iconify" data-icon="mdi:menu"></span>
+        </div>
         <nav>
             <ul class="nav-links">
                 <li><a href="/index.html" class="nav-link">home</a></li>
@@ -22,11 +25,6 @@
                 <li><a href="/pages/watchlist.html" class="nav-link">watchlist</a></li>
             </ul>
         </nav>
-        <div class="menu-icon">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
     </header>
     <main>
         <section id="home" class="section">
@@ -108,6 +106,5 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
 </body>
 </html>

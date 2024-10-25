@@ -113,7 +113,35 @@ p {
 .nav-link.active {
     color: var(--primary-text);
 }
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--primary-text);
+    margin-left: auto; /* Pushes the icon to the far right */
+}
 
+/* Show Menu Icon and Hide Nav Links on Small Screens */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        transition: var(--transition);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
 #vanta-bg {
     position: absolute;
     top: 0;
