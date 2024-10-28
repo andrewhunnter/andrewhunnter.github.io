@@ -37,7 +37,7 @@ h1, h2, h3 {
 }
 
 h1, h2 {
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
 }
 
 h3 {
@@ -331,6 +331,9 @@ p {
     margin-bottom: 2rem;
     color: var(--primary-text);
     -webkit-text-fill-color: var(--primary-text);
+    font-size: clamp(2rem, 5vw, 4rem);
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .maintenance-cards {
