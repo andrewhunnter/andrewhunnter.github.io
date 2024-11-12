@@ -1,5 +1,28 @@
-// Wait for the DOM to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', () => {
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('no-scroll'); // Prevent scrolling when menu is open
+        });
+
+        // Close the menu if clicking anywhere outside of it
+        document.addEventListener('click', (e) => {
+            if (
+                !hamburger.contains(e.target) &&
+                !navLinks.contains(e.target) &&
+                navLinks.classList.contains('active')
+            ) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    }
     // Animated section transitions
     setupSectionTransitions();
 
@@ -23,10 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-}
+
 
 // Function to set up animated section transitions
 function setupSectionTransitions() {
