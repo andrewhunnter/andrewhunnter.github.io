@@ -1,4 +1,3 @@
-/* Importing fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 /* Root Variables */
@@ -37,7 +36,7 @@ h1, h2, h3 {
 }
 
 h1, h2 {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: 4rem;
 }
 
 h3 {
@@ -102,6 +101,11 @@ p {
     list-style: none;
 }
 
+.nav-links.active {
+    display: flex;
+}
+
+
 .nav-link {
     color: var(--primary-text);
     text-decoration: none;
@@ -109,39 +113,24 @@ p {
     transition: var(--transition);
 }
 
-.nav-link:hover,
-.nav-link.active {
-    color: var(--primary-text);
-}
-.menu-icon {
+.hamburger {
     display: none;
+    background: none;
+    border: none;
     cursor: pointer;
-    font-size: 2rem;
-    color: var(--primary-text);
-    margin-left: auto; /* Pushes the icon to the far right */
+    padding: 0;
+    z-index: 1001;
+}
+  
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-text);
+    margin: 5px 0;
+    transition: all 0.3s ease;
 }
 
-/* Show Menu Icon and Hide Nav Links on Small Screens */
-@media (max-width: 768px) {
-    .menu-icon {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        padding: 1rem 0;
-        transition: var(--transition);
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-}
 /* Home Section */
 #vanta-bg {
     position: absolute;
@@ -235,17 +224,6 @@ p {
     height: 700px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .calendly-inline-widget {
-        height: 600px;
-    }
-    
-    .calendly-container {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-    }
-}
 
 /* Services Container */
 .services-container {
@@ -361,6 +339,55 @@ p {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    h1, h2 {
+        font-size: 3rem;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links li {
+        margin: 20px 0;
+    }
+    
+    .hamburger {
+        display: block; /* Show hamburger at this width */
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1001; /* Ensure it stays on top of other elements */
+    }
+
+    .hamburger.active span {
+        background-color: var(--accent-color); /* Change color if desired */
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
     .services-container {
         grid-template-columns: 1fr;
     }
@@ -375,6 +402,15 @@ p {
 
     .price {
         font-size: 1.5rem;
+    }
+
+    .calendly-inline-widget {
+        height: 600px;
+    }
+    
+    .calendly-container {
+        margin: 1rem;
+        width: calc(100% - 2rem);
     }
 }
 

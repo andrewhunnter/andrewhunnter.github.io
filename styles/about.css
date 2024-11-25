@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 /* Root Variables */
 :root {
     --primary-bg: #000000;
@@ -129,106 +131,41 @@ p {
     transition: all 0.3s ease;
 }
 
-#vanta-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    border-bottom: 2px solid var(--primary-text);
-}
 
-.home-content {
-    position: relative;
-    z-index: 1;
+
+/* About Section */
+#about {
+    padding: 4rem 2rem;
+    background: var(--primary-bg);
+    color: var(--primary-text);
     text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-}
-
-.mouse {
-    width: 30px;
-    height: 50px;
-    border: 2px solid white;
-    border-radius: 20px;
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.mouse::before {
-    content: '';
-    width: 4px;
-    height: 8px;
-    background: white;
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    animation: scroll 2s infinite;
-}
-
-@keyframes scroll {
-    0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, 20px); opacity: 0; }
-}
-
-/* Watchlist Styles */
-.watchlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
-    padding: 2rem;
 }
 
-.watchlist-tile {
-    background: var(--gradient-bg);
-    border: var(--card-border);
-    border-radius: var(--card-radius);
-    overflow: hidden;
-    transition: var(--transition);
-    display: flex;
-    text-decoration: none;
-    color: var(--primary-text);
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-text);
 }
 
-.watchlist-tile:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+.text-content {
+    text-align: left;
+    max-width: 600px;
 }
 
-.watchlist-content {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.watchlist-chart {
-    width: 100%;
-    height: 300px;  /* Increased height to match the JS setting */
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.watchlist-tile h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-text);
-}
-
-.watchlist-tile p {
-    font-size: 1rem;
-    color: var(--secondary-text);
-    flex-grow: 1;
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
