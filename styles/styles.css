@@ -144,7 +144,9 @@ p {
 }
 
 .cta-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.8rem 1.6rem;
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -155,6 +157,14 @@ p {
     transition: var(--transition);
     backdrop-filter: blur(5px);
     margin-top: 1rem;
+}
+
+.cta-button .iconify {
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .iconify {
+    transform: translateX(4px);
 }
 
 .cta-button:hover {
@@ -254,54 +264,34 @@ p {
 .social-buttons {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    margin: 1rem 0 2rem;
 }
 
 .social-button {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: var(--gradient-bg);
-    border: var(--card-border);
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
 }
 
 .social-button::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-    transform: scale(0);
-    transition: transform 0.5s ease-out;
+    display: none;
 }
 
 .social-button:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, rgba(84, 81, 87, 0.2), rgba(51, 48, 50, 0.2), rgba(165, 165, 157, 0.2));
-}
-
-.social-button:hover::before {
-    transform: scale(1);
+    transform: scale(1.2);
+    box-shadow: none;
+    background: none;
 }
 
 .social-button .iconify {
-    font-size: 40px;
+    font-size: 1.8rem;
     color: var(--primary-text);
-    transition: var(--transition);
-}
-
-.social-button:hover .iconify {
-    transform: scale(1.2);
 }
 
 /* Timeline Section */
@@ -491,17 +481,12 @@ p {
     }
 
     .social-buttons {
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-    }
-
-    .social-button {
-        width: 70px;
-        height: 70px;
+        gap: 1.2rem;
+        margin: 0.8rem 0 1.5rem;
     }
 
     .social-button .iconify {
-        font-size: 35px;
+        font-size: 1.5rem;
     }
 
     .subtitle {
