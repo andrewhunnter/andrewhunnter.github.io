@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
     // Animated section transitions
     setupSectionTransitions();
 
@@ -44,9 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
             spacing: 15.00
         });
     }
+
+    // Carousel functionality
+    const carouselInner = document.querySelector('.enc-carousel-inner');
+    const prevButton = document.querySelector('.carousel-control.prev');
+    const nextButton = document.querySelector('.carousel-control.next');
+    const cards = document.querySelectorAll('.enc-card');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        const offset = -currentIndex * 100;
+        carouselInner.style.transform = `translateX(${offset}%)`;
+    }
+
+    if (prevButton && nextButton && carouselInner) {
+        prevButton.addEventListener('click', function () {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', function () {
+            currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
+            updateCarousel();
+        });
+    }
 });
-
-
 
 // Function to set up animated section transitions
 function setupSectionTransitions() {
